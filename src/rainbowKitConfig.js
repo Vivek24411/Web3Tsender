@@ -1,5 +1,5 @@
 import { getDefaultConfig } from '@rainbow-me/rainbowkit';
-import { mainnet, polygon, optimism, arbitrum, anvil, zksync } from 'wagmi/chains';
+import { mainnet, polygon, optimism, arbitrum, anvil, zksync,sepolia } from 'wagmi/chains';
 
 const walletConnectProjectId = import.meta.env.VITE_WALLETCONNECT_PROJECT_ID;
 
@@ -10,7 +10,7 @@ if (!walletConnectProjectId) {
 const config = getDefaultConfig({
   appName: 'My dApp',
   projectId: walletConnectProjectId,
-  chains: [mainnet, polygon, optimism, arbitrum, anvil, zksync],
+  chains: [mainnet, polygon, optimism, arbitrum, anvil, zksync,sepolia],
   ssr: false,
 });
 
