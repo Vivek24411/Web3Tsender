@@ -56,7 +56,7 @@ const AirDropForm = () => {
             functionName:"airdropERC20",
             args:[tokenAddress,
                 recipientsAddress.split(/[,\n]+/).map(addr => addr.trim()).filter(addr => addr !== ''),
-                amounts.split(/[,\n]+/).map(amt => amt.trim()).filter(amt => amt !== ''),
+                amounts.split(/[,\n]+/).map(amt => amt.trim()).filter(amt => amt !== '').map(amt => BigInt(amt)),
                 BigInt(totalAmount),
             ]
         })
