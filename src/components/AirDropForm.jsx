@@ -50,24 +50,28 @@ const AirDropForm = () => {
             
         }
 
-        const transactionHash = await writeContractAsync({
-            abi:tsenderAbi,
-            address:spenderContractAddress,
-            functionName:"airdropERC20",
-            args:[tokenAddress,
-                recipientsAddress.split(/[,\n]+/).map(addr => addr.trim()).filter(addr => addr !== ''),
-                amounts.split(/[,\n]+/).map(amt => amt.trim()).filter(amt => amt !== '').map(amt => BigInt(amt)),
-                BigInt(totalAmount),
-            ]
-        })
-
-        console.log(transactionHash);
-
-        const transationReceipt1 = await waitForTransactionReceipt(config,{
-            hash:transactionHash
-        })
-
-        console.log(transationReceipt1);
+        try{
+            const transactionHash = await writeContractAsync({
+                abi:tsenderAbi,
+                address:spenderContractAddress,
+                functionName:"airdropERC20",
+                args:[tokenAddress,
+                    recipientsAddress.split(/[,\n]+/).map(addr => addr.trim()).filter(addr => addr !== ''),
+                    amounts.split(/[,\n]+/).map(amt => amt.trim()).filter(amt => amt !== '').map(amt => BigInt(amt)),
+                    BigInt(totalAmount),
+                ]
+            })
+    
+            console.log(transactionHash);
+    
+            const transationReceipt1 = await waitForTransactionReceipt(config,{
+                hash:transactionHash
+            })
+    
+            console.log(transationReceipt1);
+        }catch(error){
+            console.error("Contract execution failed:", error)
+        }
         
         
         
